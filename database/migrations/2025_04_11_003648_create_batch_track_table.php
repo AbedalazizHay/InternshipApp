@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('institution_id')->nullable()->constrained('institutions');
-            $table->foreignId('academic_level_id')->nullable()->constrained('academic_levels');
+        Schema::create('batch_track', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('batch_id')->constrained();
+            $table->foreignId('track_id')->constrained();
+            $table->timestamps();
         });
     }
 
@@ -22,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('batch_track');
     }
 };

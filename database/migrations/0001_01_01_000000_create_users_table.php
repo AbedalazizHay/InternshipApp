@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone_number');
-            $table->date('date_of_birth');
-            $table->enum('gender', ['male', 'female']);
-            $table->enum('role',['admin','student','instructor']);
-            $table->enum('status',['active','inactive']);
-            $table->boolean('has_paid')->default(false);
+            $table->date('date_of_birth')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->enum('role',['admin','student','instructor'])->default('student');
+            $table->enum('status',['active','inactive'])->default('inactive');
+            $table->boolean('has_paid')->default(false)->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

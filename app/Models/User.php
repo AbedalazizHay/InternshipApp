@@ -6,13 +6,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -20,9 +23,13 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'phone_number',
+        'date_of_birth',
+        'gender',
     ];
 
     /**
@@ -55,4 +62,13 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Academic_level::class);
     }
+    public function userBatches(): User|HasMany
+    { return $this->hasMany(User_Batch::class); }
+    public function tracks(): BelongsToMany
+    { return $this->belongsToMany(Track::class, 'user__batches'); }
+    public function batches(): BelongsToMany
+    { return $this->belongsToMany(Batch::class, 'user__batches'); }
+    public function payments(): HasManyThrough|User
+    { return $this->hasManyThrough(Payment::class, User_Batch::class); }
+
 }

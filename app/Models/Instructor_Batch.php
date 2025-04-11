@@ -14,12 +14,14 @@ class Instructor_Batch extends Model
         'instructor_id',
         'assigned_date',
     ];
-    public function user():BelongsTo
+    public function instructor(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'instructor_id');
     }
-    public function batch():BelongsTo
+
+    public function batch(): BelongsTo
     {
-        return $this->belongsTo(Batch::class);
+        return $this->belongsTo(Batch::class, 'batch_id');
     }
+
 }

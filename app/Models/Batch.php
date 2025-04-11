@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Batch extends Model
@@ -19,8 +20,10 @@ class Batch extends Model
         'is_active',
     ];
 
-    public function tracks():HasMany
+    public function offeredTracks(): BelongsToMany
     {
-        return$this->HasMany(Track::class);
+        return $this->belongsToMany(Track::class, 'batch_track');
     }
+
+
 }
