@@ -22,7 +22,6 @@
             color: #333;
         }
 
-        /* Card Container */
         .login-container {
             background: #fff;
             padding: 2rem;
@@ -39,7 +38,6 @@
             color: #4a4a4a;
         }
 
-        /* Error Message */
         .error {
             background: #ffe6e6;
             color: #c0392b;
@@ -49,7 +47,6 @@
             font-size: 0.9rem;
         }
 
-        /* Form Styles */
         form {
             display: flex;
             flex-direction: column;
@@ -76,8 +73,7 @@
             transition: border-color 0.3s;
         }
 
-        .form-group input[type="email"]:focus,
-        .form-group input[type="password"]:focus {
+        .form-group input:focus {
             border-color: #667eea;
             outline: none;
         }
@@ -98,7 +94,22 @@
             background: #5469d4;
         }
 
-        /* Responsive tweaks */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #fff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @media (max-width: 480px) {
             .login-container {
                 margin: 1rem;
@@ -118,7 +129,7 @@
         <div class="error">{{ session('error') }}</div>
     @endif
 
-    <form method="POST" action="{{ url('/login') }}">
+    <form method="POST" action="{{ url('/login') }}" onsubmit="handleLogin(this)">
         @csrf
 
         <div class="form-group">
@@ -131,8 +142,16 @@
             <input type="password" name="password" id="password" required>
         </div>
 
-        <button type="submit">Login</button>
+        <button id="login-btn" type="submit">Login</button>
     </form>
 </div>
+
+<script>
+    function handleLogin(form) {
+        const button = document.getElementById('login-btn');
+        button.disabled = true;
+        button.innerHTML = 'Checking... <span class="spinner"></span>';
+    }
+</script>
 </body>
 </html>
