@@ -22,7 +22,12 @@ class RegisterController extends Controller
         $validated['password'] = \Hash::make($validated['password']);
         $validated['role'] ='student';
 
+        $validated['role'] ='student';
+
+
         $user = User::create($validated);
+
+
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
