@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user__batches', function (Blueprint $table) {
             $table->id();
             $table->date('registration_date');
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->enum('status',['complete','incomplete'])->default('incomplete');
             $table->timestamps();
         });
     }
