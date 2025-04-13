@@ -20,6 +20,7 @@ class RegisterController extends Controller
             'gender'=>'in:male,female',
         ]);
         $validated['password'] = \Hash::make($validated['password']);
+        $validated['role'] ='student';
 
         $validated['role'] ='student';
 

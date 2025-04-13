@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('status',['pending','approved','rejected','refunded']);
             $table->string('payment_reference');
             $table->date('payment_date');
-            $table->enum('payment_type',['credit','whish']);
+            $table->string('payment_type');
             $table->string('notes')->nullable();
             $table->timestamps();
         });
