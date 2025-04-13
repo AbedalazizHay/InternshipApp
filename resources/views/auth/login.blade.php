@@ -2,156 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>XpertBot Login</title>
+    <title>XpertBot Academy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <style>
-        /* Global Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-        }
-
-        .login-container {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .login-container h2 {
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            color: #4a4a4a;
-        }
-
-        .error {
-            background: #ffe6e6;
-            color: #c0392b;
-            padding: 0.75rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-group input[type="email"],
-        .form-group input[type="password"] {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
-            border-color: #667eea;
-            outline: none;
-        }
-
-        button {
-            background: #667eea;
-            border: none;
-            padding: 0.75rem;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #5469d4;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top: 2px solid #fff;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            vertical-align: middle;
-            margin-left: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-            .login-container h2 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    @vite('resources/css/app.css')
 </head>
-<body>
-<div class="login-container">
-    <h2>XpertBot Login</h2>
+<body class="bg-slate-700 min-h-screen flex items-center justify-center font-sans">
+
+<div class="w-full max-w-md bg-white shadow-lg rounded-lg p-8 text-center">
+    <h1 class="text-xl font-semibold text-gray-800 mb-2">XpertBot Academy</h1>
+    <h2 class="text-2xl font-semibold text-gray-700 mb-6">Welcome Back!</h2>
 
     @if(session('error'))
-        <div class="error">{{ session('error') }}</div>
+        <div class="bg-red-100 text-red-600 text-sm p-3 rounded mb-4">
+            {{ session('error') }}
+        </div>
     @endif
 
-    <form method="POST" action="{{ url('/login') }}" onsubmit="handleLogin(this)">
+    <form method="POST" action="{{ url('/login') }}" class="space-y-4 text-left">
         @csrf
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required autofocus>
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <input type="email" name="email" id="email" required autofocus
+                   class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
         </div>
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
+        <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input type="password" name="password" id="password" required
+                   class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent">
         </div>
 
-        <button id="login-btn" type="submit">Login</button>
+        <div class="flex items-center justify-between text-sm">
+            <label class="flex items-center gap-1 text-gray-600">
+                <input type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                Remember Me
+            </label>
+            {{--            <a href="{{ route('password.request') }}" class="text-indigo-600 hover:underline">Forgot Your Password?</a>--}}
+        </div>
+
+        <button type="submit"
+                class="cursor-pointer w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 rounded transition">
+            Login
+        </button>
     </form>
 </div>
 
-<script>
-    function handleLogin(form) {
-        const button = document.getElementById('login-btn');
-        button.disabled = true;
-        button.innerHTML = 'Checking... <span class="spinner"></span>';
-    }
-</script>
 </body>
 </html>
