@@ -41,6 +41,7 @@ class RegisterController extends Controller
                 'date_of_birth',
                 'gender',
                 'password',
+                'role'
             ])
         ],201);
     }
