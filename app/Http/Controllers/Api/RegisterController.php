@@ -20,12 +20,14 @@ class RegisterController extends Controller
             'gender'=>'in:male,female',
         ]);
         $validated['password'] = \Hash::make($validated['password']);
-        $validated['role'] ='student';
 
-        $validated['role'] ='student';
+
 
 
         $user = User::create($validated);
+
+        $user->role = 'student';
+        $user->save();
 
 
 
@@ -41,7 +43,6 @@ class RegisterController extends Controller
                 'email',
                 'date_of_birth',
                 'gender',
-                'password',
                 'role'
             ])
         ],201);
