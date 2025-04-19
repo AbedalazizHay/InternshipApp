@@ -11,12 +11,12 @@ class Instructor_Batch extends Model
     use HasFactory;
     protected $fillable = [
         'batch_id',
-        'instructor_id',
+        'user_id',
         'assigned_date',
     ];
-    public function instructor(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'instructor_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function batch(): BelongsTo

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,8 +13,10 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\HasName;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements HasName,FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
@@ -30,6 +34,7 @@ class User extends Authenticatable
         'phone_number',
         'date_of_birth',
         'gender',
+        'status',
     ];
 
     /**
@@ -70,5 +75,24 @@ class User extends Authenticatable
     { return $this->belongsToMany(Batch::class, 'user__batches'); }
     public function payments(): HasManyThrough|User
     { return $this->hasManyThrough(Payment::class, User_Batch::class); }
+    public function getAttribute($key)
+    {
+        if ($key === 'name') {
+            return "{$this->first_name} {$this->last_name}";
+        }
 
+        return parent::getAttribute($key);
+    }
+
+
+    public function getFilamentName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role === 'admin';
+    }
 }

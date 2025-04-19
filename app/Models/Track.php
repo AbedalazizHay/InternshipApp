@@ -17,7 +17,7 @@ class Track extends Model
         'is_active',
         'max_students'
     ];
-    public function availableInBatches(): BelongsToMany
+    public function batches(): BelongsToMany
     {
         return $this->belongsToMany(Batch::class, 'batch_track');
     }

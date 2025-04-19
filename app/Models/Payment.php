@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Payment extends Model
@@ -20,8 +22,12 @@ class Payment extends Model
         'notes',
     ];
 
-    public function paymentMethod():HasOne
+    public function paymentMethod(): BelongsTo
     {
-        return $this->HasOne(Payment::class);
+        return $this->BelongsTo(Payment_method::class);
+    }
+    public function userBatches(): Payment|HasMany
+    {
+        return $this->hasMany(User_Batch::class);
     }
 }

@@ -20,10 +20,15 @@ class Batch extends Model
         'is_active',
     ];
 
-    public function offeredTracks(): BelongsToMany
+    public function tracks(): BelongsToMany
     {
         return $this->belongsToMany(Track::class, 'batch_track');
     }
+    public function userBatches()
+    {
+        return $this->hasMany(User_Batch::class);
+    }
+
 
 
 }

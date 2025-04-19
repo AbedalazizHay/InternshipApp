@@ -23,17 +23,17 @@ class User_Batch extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function track():BelongsToMany
+    public function track(): BelongsTo
     {
-        return $this->belongsToMany(Track::class);
+        return $this->belongsTo(Track::class);
     }
     public function payment():BelongsTo
     {
         return $this->belongsTo(Payment::class);
     }
-    public function batch():BelongsToMany
+    public function batch(): BelongsTo
     {
-        return $this->belongsToMany(Batch::class);
+        return $this->belongsTo(Batch::class);
     }
 
 }
