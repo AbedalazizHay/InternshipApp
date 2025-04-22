@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
+
+            // 
+
+            $table->string('google_id') ->nullable();
+            
             $table->string('phone_number');
             $table->date('date_of_birth')->nullable();
             $table->enum('gender', ['male', 'female'])->nullable();

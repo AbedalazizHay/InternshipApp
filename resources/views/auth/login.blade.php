@@ -34,6 +34,10 @@
         </div>
 
         <div class="flex items-center justify-between text-sm">
+        <!-- login with google -->
+        <a href="{{ route('auth.google') }}"  class="inline-block px-6 py-2 text-white bg-red-600 rounded-lg shadow">Login with Google</a>
+        
+
             <label class="flex items-center gap-1 text-gray-600">
                 <input type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                 Remember Me

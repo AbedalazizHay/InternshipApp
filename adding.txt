@@ -1,0 +1,22 @@
+login.blade.php
+# 
+GOOGLE_CLIENT_ID=11990494827-c8mu1rj5vnsco2478nvfsdbskiunniru.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+GOOGLE_CALLBACK_REDIRECTS=http://localhost:8000/auth/google-callback
+#     .env
+
+servers.php :    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_CALLBACK_REDIRECTS'),
+    ],
+
+php artisan make:controller SocialiteController
+
+web.php: Route:: get('auth/google', [SocialiteController::class, 'googleLogin'])
+    ->name('auth.google');
+
+    in SocializeController: public function googleLogin() { return Socialite::driver('google')->redirect();}
+
+    public function googleAuthentication(){ $googleUser = Socialite::friver('google') ->user();  $user= User::where('google_id', $googleUser ->id)->user()  if($user) Auth::login($user); return redirect()->route('dashboard'); } else{ $userData =User::create({'name' => $googleUser ->name, 'email' => #googleUser -> email, 'password' => Hash::make('Password@1234'), 'google_id' => $googleUser->id, }); //add use facades\auth      if ($userData) { Auth::login($userData); return redirect() ->route('dashboard') //put it in a try , catch (exception $e) {dd($e);
+    

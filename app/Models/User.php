@@ -35,6 +35,8 @@ class User extends Authenticatable implements HasName,FilamentUser
         'date_of_birth',
         'gender',
         'status',
+        // 
+        'google_id',
     ];
 
     /**

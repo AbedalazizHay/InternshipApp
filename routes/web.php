@@ -5,6 +5,15 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', fn () => redirect('/login'));
 
+// 
+Route::controller('SocialiteController'::class)->group(function () {
+    Route:: get('auth/google', 'googleLogin')
+        ->name('auth.google');
+Route::get('auth/google-callback', 'googleAuthentication')
+        ->name('auth.google-callback');
+});
+
+
 // Auth routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
