@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
-use Illuminate\Validation\ValidationException;
-use App\Models\Track;
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use App\Models\Batch;
 class BatchController extends Controller
@@ -21,9 +22,9 @@ class BatchController extends Controller
              'start_date' => 'required|date','track_id',
              'end_date' => 'required|date',
              'max_students'=>'required|integer',
-             'is_active' => 'required|boolean'                     
+             'is_active' => 'required|boolean'
    ]);
- 
+
          $batch = Batch::create([
             'track_id'    =>$request->track_id,
              'name'       => $request->name,
@@ -32,7 +33,7 @@ class BatchController extends Controller
              'max_students'=>$request->max_students,
              'is_active'  => $request->is_active
          ]);
- 
+
          return response()->json([
              'message' => 'Batch created successfully.',
              'batch'   => $batch
@@ -53,4 +54,5 @@ class BatchController extends Controller
         if(!$batch){
             return response()->json(['message'=>'no inactive batch found'],404);
         }
+        return response()->json($batch);
     }}
