@@ -5,7 +5,7 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', fn () => redirect('/login'));
 
-// 
+//
 Route::controller('SocialiteController'::class)->group(function () {
     Route:: get('auth/google', 'googleLogin')
         ->name('auth.google');
@@ -25,3 +25,8 @@ Route::get('/instructor/dashboard', [DashboardController::class, 'instructor'])
 
 Route::get('/student/dashboard', [DashboardController::class, 'student'])
     ->middleware('auth')->name('student.dashboard');
+
+Route::get('/payment-notice', function () {
+    return view('auth.payment-notice');
+})->name('payment.notice');
+

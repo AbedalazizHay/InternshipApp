@@ -35,9 +35,13 @@ class User extends Authenticatable implements HasName,FilamentUser
         'date_of_birth',
         'gender',
         'status',
-        // 
+        'role',
+        'has_paid',
+        'institution_id',
+        'academic_level_id',
         'google_id',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.

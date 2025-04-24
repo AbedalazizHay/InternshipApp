@@ -6,8 +6,8 @@ use App\Http\Controllers\Api\TrackController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/register/user', [RegisterController::class,'registerUser']);
-Route::post('/login/user', [RegisterController::class,'loginUser']);
+Route::post('/register', [RegisterController::class,'registerUser']);
+Route::post('/login', [RegisterController::class,'loginUser']);
 
 Route::get('/profile',function (Request $request ){
     return response()->json([
