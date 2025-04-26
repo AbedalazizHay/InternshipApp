@@ -5,6 +5,8 @@ use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\TrackController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\InstitutionController;
+use App\Http\Controllers\Api\AcademicLevelController;
 
 Route::post('/register', [RegisterController::class,'registerUser']);
 Route::post('/login', [RegisterController::class,'loginUser']);
@@ -43,3 +45,11 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::get('/tracks/{id}', [TrackController::class, 'show']);
 
 });
+
+// routes/api.php
+
+
+Route::get('/institutions', [InstitutionController::class, 'index']);
+Route::get('/academic-levels', [AcademicLevelController::class, 'index']);
+Route::post('/institutions', [InstitutionController::class, 'store']);
+Route::post('/academic-levels', [AcademicLevelController::class, 'store']);
