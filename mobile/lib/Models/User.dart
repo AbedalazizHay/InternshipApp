@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class User {
   final String? first_name;
   final String? last_name ;
@@ -20,6 +22,6 @@ class User {
       'phone_number':phone_number,
     };
   }
-
+         String toJson() => json.encode(toMap());
 
 }

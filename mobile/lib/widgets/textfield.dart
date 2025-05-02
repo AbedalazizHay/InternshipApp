@@ -7,7 +7,7 @@ class Custextfiled extends StatefulWidget {
   final String textlable;
   final IconData? prefixIcon;
   final bool obscureText;
-  final TextEditingController mycontrolle;
+  final TextEditingController controller;
   final String? Function(String?)? validator;
 
   const Custextfiled({
@@ -17,8 +17,8 @@ class Custextfiled extends StatefulWidget {
     required this.textlable,
     required this.prefixIcon,
     this.obscureText = false,
-    required this.mycontrolle,
-    required this.validator,
+    required this.controller,
+    required this.validator, 
   });
 
   @override
@@ -56,7 +56,7 @@ class _CustextfiledState extends State<Custextfiled> {
         ),
         const SizedBox(height: 6),
         TextFormField(
-          controller: widget.mycontrolle,
+          controller: widget.controller,
           obscureText: _obscureText,
           validator: widget.validator,
           decoration: InputDecoration(

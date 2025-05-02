@@ -104,7 +104,7 @@ class _SignupState extends State<Signup> {
                           hinttext: 'Username',
                           textlable: "Username",
                           prefixIcon: FontAwesomeIcons.user,
-                          mycontrolle: _usernameController,
+                          controller: _usernameController,
                         ),
                       ),
                     ),
@@ -124,7 +124,7 @@ class _SignupState extends State<Signup> {
                             return null;
                           },
                           hinttext: 'Email address',
-                          mycontrolle: _emailController,
+                          controller: _emailController,
                           textlable: "Email address",
                           prefixIcon: FontAwesomeIcons.envelope,
                         ),
@@ -146,7 +146,7 @@ class _SignupState extends State<Signup> {
                             return null;
                           },
                           hinttext: 'Enter your Password',
-                          mycontrolle: _passwordController,
+                          controller: _passwordController,
                           textlable: "Password",
                           prefixIcon: FontAwesomeIcons.lock,
                           obscureText: true,

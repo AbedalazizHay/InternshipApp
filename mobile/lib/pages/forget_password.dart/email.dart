@@ -57,7 +57,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       return null;
                     },
                     hinttext: 'Enter your Email',
-                    mycontrolle: _emailController,
+                    controller: _emailController,
                     textlable: "Email address",
                     prefixIcon: Icons.email,
                   ),

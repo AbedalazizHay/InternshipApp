@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:xpertbot/widgets/button.dart';
 import 'package:xpertbot/widgets/textfield.dart';
 import 'signup.dart';
 import 'package:xpertbot/pages/forget_password.dart/email.dart'; // Import the ForgotPasswordPage
 import 'package:xpertbot/pages/tracks.dart'; // Import the TracksPage after login
+import 'package:xpertbot/Controllers/LoginController.dart';
+import 'package:xpertbot/Routs/AppRout.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,8 +18,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  // final TextEditingController _emailController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
+  final LoginController controller = Get.put(LoginController());
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<void> _login() async {
@@ -101,9 +106,11 @@ class _LoginState extends State<Login> {
                             return null;
                           },
                           hinttext: 'Enter your Email',
-                          mycontrolle: _emailController,
+
+                          
                           textlable: "Email address",
                           prefixIcon: FontAwesomeIcons.envelope,
+                          controller:controller.email,
                         ),
                       ),
 
@@ -123,7 +130,7 @@ class _LoginState extends State<Login> {
                             return null;
                           },
                           hinttext: 'Enter your Password',
-                          mycontrolle: _passwordController,
+                          controller: controller.password,
                           textlable: "Password",
                           prefixIcon: FontAwesomeIcons.lock,
                           obscureText: true,

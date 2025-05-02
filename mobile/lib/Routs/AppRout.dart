@@ -1,5 +1,5 @@
 class AppRout{
-static const String signup= '/register/user';
-static const String login ='/login/user';
+static const String signup= '/register';
+static const String login ='/login';
 
 }
