@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:xpertbot/Controllers/SignupController.dart';
 import 'package:xpertbot/widgets/button.dart';
 import 'package:xpertbot/widgets/textfield.dart';
 import 'package:xpertbot/pages/success_page.dart';
@@ -15,9 +18,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+ final SignupController controller = Get.put(SignupController());
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Future<void> _signup() async {
@@ -27,9 +29,9 @@ class _SignupState extends State<Signup> {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
 
         // Save user data to SharedPreferences
-        await prefs.setString('username', _usernameController.text.trim());
-        await prefs.setString('email', _emailController.text.trim());
-        await prefs.setString('password', _passwordController.text.trim());
+        await prefs.setString('username',controller.username.text.trim());
+        await prefs.setString('email', controller.email.text.trim());
+        await prefs.setString('password', controller.password.text.trim());
 
         // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
@@ -43,8 +45,8 @@ class _SignupState extends State<Signup> {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (context) => SuccessPage(
-              userName: _usernameController.text.trim(),
-              email: _emailController.text.trim(),
+              userName: controller.username.text.trim(),
+              email: controller.email.text.trim(),
             ),
           ),
         );
@@ -104,7 +106,7 @@ class _SignupState extends State<Signup> {
                           hinttext: 'Username',
                           textlable: "Username",
                           prefixIcon: FontAwesomeIcons.user,
-                          controller: _usernameController,
+                          controller: controller.username,
                         ),
                       ),
                     ),
@@ -124,7 +126,7 @@ class _SignupState extends State<Signup> {
                             return null;
                           },
                           hinttext: 'Email address',
-                          controller: _emailController,
+                          controller: controller.email,
                           textlable: "Email address",
                           prefixIcon: FontAwesomeIcons.envelope,
                         ),
@@ -146,7 +148,7 @@ class _SignupState extends State<Signup> {
                             return null;
                           },
                           hinttext: 'Enter your Password',
-                          controller: _passwordController,
+                          controller: controller.password,
                           textlable: "Password",
                           prefixIcon: FontAwesomeIcons.lock,
                           obscureText: true,
@@ -163,7 +165,9 @@ class _SignupState extends State<Signup> {
                         width: isWeb ? 400 : size.width * 0.8,
                         child: CusButton(
                           title: 'Signup',
-                          onPressed: _signup,
+                          onPressed:(){
+                            controller.signup();
+                          } //_signup,
                         ),
                       ),
                     ),

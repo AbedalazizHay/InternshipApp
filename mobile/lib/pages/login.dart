@@ -166,7 +166,10 @@ class _LoginState extends State<Login> {
                         height: 55,
                         child: CusButton(
                           title: 'Login',
-                          onPressed: _login,
+                          onPressed: //_login,
+                          (){
+                            controller.login();
+                          }
                         ),
                       ),
 
