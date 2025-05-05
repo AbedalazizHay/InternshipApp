@@ -18,7 +18,9 @@ class SignupController extends GetxController{
       gender: "male",
       institution_id: 1,
       academic_level_id: 3,
-      phone_number: "1267785788345"
+      
+      
+      //test
     );
     String requestBody = user.toJson();
     var post = await Dioclient().getInstance().post( '/signup', data: requestBody);
