@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:xpertbot/widgets/button.dart'; // Custom Button
 import 'package:xpertbot/widgets/header.dart';  // Header Widget
 import 'package:xpertbot/pages/personal_info.dart';  // Next Page after Tracks
+import 'package:xpertbot/Models/UserProfile.dart';  // UserProfile Model
 
 class TracksPage extends StatefulWidget {
   const TracksPage({super.key});
@@ -103,10 +104,12 @@ class _TracksPageState extends State<TracksPage> {
                       );
                     } else {
                       // Proceed to the next page
-                      Navigator.push(
+                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const PersonalInfo(),
+                          builder: (context) => PersonalInfo(
+                            selectedTracks: selectedTracks,
+                          ),
                         ),
                       );
                     }

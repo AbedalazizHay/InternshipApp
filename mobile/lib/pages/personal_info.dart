@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:xpertbot/Models/UserProfile.dart' show UserProfile;
 import 'package:xpertbot/widgets/button.dart'; // Custom Button
 import 'package:xpertbot/widgets/header.dart';  // Header Widget
+import 'package:xpertbot/pages/UserProfile.dart';
 
 class PersonalInfo extends StatefulWidget {
-  const PersonalInfo({super.key});
+  final List<String> selectedTracks;
+
+  const PersonalInfo({super.key, required this.selectedTracks});
 
   @override
   _PersonalInfoPageState createState() => _PersonalInfoPageState();
@@ -236,7 +240,15 @@ class _PersonalInfoPageState extends State<PersonalInfo> {
                       );
 
                       // You can navigate to another page or just finish
-                      Navigator.pop(context); // Go back to the previous page or proceed further
+              Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UserProfilePage(
+                            selectedTracks: widget.selectedTracks,
+                            academicLevel: _academicLevel!,
+                          ),
+                        ),
+                      );
                     }
                   },
                 ),
