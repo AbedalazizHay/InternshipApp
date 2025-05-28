@@ -1,0 +1,1 @@
+ C:\\Users\\user\\internshipProject\\RegistrationPage\\mobile\\.dart_tool\\flutter_build\\4cd5a7d5b6fc08898aae1684af2f0996\\dart_build_result.json: 
